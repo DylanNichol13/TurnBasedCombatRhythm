@@ -9,8 +9,8 @@ public class BattleController : MonoBehaviour
     public static BattleController instance;
 
     public Battle CurrentBattle;
-
-    [SerializeField] private Sprite _testSprite;
+    
+    [SerializeField] private List<AgentData> _testAgents;
     private List<BattlePosition> _battlePositions = new List<BattlePosition>();
 
     // Start is called before the first frame update
@@ -41,19 +41,18 @@ public class BattleController : MonoBehaviour
 
         //Update UI
         UIController.instance.SetCurrentTurnAgent(newCurrentAgent);
+        UIController.instance.SetupAbilityInterface(newCurrentAgent);
     }
 
     ///Private
     //Init a test battle
     private void InitBattle()
     {
-        var agents = new List<Agent>();
-        agents.Add(new Agent("Agent one", 5, true));
-        agents.Add(new Agent("Agent two", 5, true));
-        agents.Add(new Agent("Agent three", 5, true));
-        agents.Add(new Agent("Agent four", 5));
-        agents.Add(new Agent("Agent five", 5));
-
+        List<Agent> agents = new List<Agent>();
+        foreach(var agentData in _testAgents)
+        {
+            agents.Add(new Agent(agentData));
+        }
         CurrentBattle = new Battle(agents);
     }
 
@@ -66,8 +65,9 @@ public class BattleController : MonoBehaviour
         foreach(var agent in CurrentBattle.BattleAgentsQueue)
         {
             BattlePosition battlePosition;
-            GameObject agentObj = new GameObject();
-            SpriteRenderer renderer = agentObj.AddComponent<SpriteRenderer>();
+            GameObject agentObj = Instantiate(PrefabManager.instance.AgentObjectPrefab);
+            SpriteRenderer renderer = agentObj.GetComponent<SpriteRenderer>();
+            AgentEntity entity = agentObj.GetComponent<AgentEntity>();
             
             if (agent.IsPlayer)
             {
@@ -77,12 +77,14 @@ public class BattleController : MonoBehaviour
             else
             {
                 battlePosition = _battlePositions.First(x => !x.IsPlayer && !x.IsTaken);
+                renderer.flipX = false;
             }
 
             agentObj.name = agent.Name;
             agentObj.transform.SetParent(battlePosition.transform);
             agentObj.transform.localPosition = Vector3.zero;
-            renderer.sprite = _testSprite;
+            entity.Agent = agent;
+            renderer.sprite = agent.Sprite;
             battlePosition.IsTaken = true;
         }
     }
