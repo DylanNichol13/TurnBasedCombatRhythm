@@ -786,6 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AgentObjectPrefab: {fileID: 5675474274430129941, guid: e58f4f1d09d797a45a7481d1d8062c48, type: 3}
   HoverPointerPrefab: {fileID: 4066738703995970727, guid: 0775c8e19ef9c584c9e4c424cd6e6f9e, type: 3}
+  AttackReadyIndicatorPrefab: {fileID: 6878272626582338210, guid: 0c50971a62d7bcc488e1161882ada1e9, type: 3}
 --- !u!1 &730280928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,6 +1406,7 @@ GameObject:
   - component: {fileID: 1423823721}
   - component: {fileID: 1423823719}
   - component: {fileID: 1423823722}
+  - component: {fileID: 1423823723}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -1467,6 +1469,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13f53cdc82d56cc41aa39c07eda7df22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1423823723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423823718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40571bf65043154980a3ced5c3a6ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1488718476

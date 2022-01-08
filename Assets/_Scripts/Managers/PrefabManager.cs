@@ -8,6 +8,7 @@ public class PrefabManager : MonoBehaviour
 
     public GameObject AgentObjectPrefab;
     public GameObject HoverPointerPrefab;
+    public GameObject AttackReadyIndicatorPrefab;
 
     // Start is called before the first frame update
     void Awake()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,14 +35,21 @@ public class UserInput
         }
 
         SelectedTarget = agent;
-        
+
         //Rhythm will happen here
-        //For now skip turn
-        BattleController.instance. ProgressTurn();
-        SetInputState(PlayerInputState.SelectAbility);
+        RhythmController.instance.StartNewRhythm();
 
 #if DEBUG
         Debug.Log($"Used {SelectedAbility.Name} on target: {SelectedTarget.Name}");
+#endif
+    }
+
+    internal void SuccessfulHit()
+    {
+        RhythmController.instance.SuccessfulHit();
+
+#if DEBUG
+        Debug.Log($"Succesful hit - {SelectedAbility.Name} on target: {SelectedTarget.Name}");
 #endif
     }
 

@@ -5,5 +5,11 @@ using UnityEngine;
 public enum PlayerInputState
 {
     SelectAbility,
-    SelectTarget
+    SelectTarget,
+    Rhythm
+}
+public enum AttackState
+{
+    Active,
+    Inactive
 }

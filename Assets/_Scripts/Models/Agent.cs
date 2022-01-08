@@ -11,6 +11,8 @@ public class Agent
     public Sprite Sprite;
     public List<AbilityData> Abilities;
 
+    public AgentEntity Entity;
+
     public Agent(AgentData data)
     {
         this.Name = data.Name;

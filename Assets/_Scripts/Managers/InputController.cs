@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,22 @@ public class InputController : MonoBehaviour
     {
         instance = this;
         UserInput = new UserInput();
+    }
+
+    private void Update()
+    {
+        RhythmControls();
+    }
+
+    private void RhythmControls()
+    {
+        if (RhythmController.instance.RhythmActive())
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                UserInput.SuccessfulHit();
+            }
+        }
     }
 
     public void SelectAbility(AbilityData ability)

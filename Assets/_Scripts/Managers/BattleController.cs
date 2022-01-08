@@ -68,6 +68,8 @@ public class BattleController : MonoBehaviour
             GameObject agentObj = Instantiate(PrefabManager.instance.AgentObjectPrefab);
             SpriteRenderer renderer = agentObj.GetComponent<SpriteRenderer>();
             AgentEntity entity = agentObj.GetComponent<AgentEntity>();
+
+            agent.Entity = entity;
             
             if (agent.IsPlayer)
             {
