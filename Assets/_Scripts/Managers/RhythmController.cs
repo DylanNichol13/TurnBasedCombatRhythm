@@ -6,6 +6,7 @@ using UnityEngine;
 public class RhythmController : MonoBehaviour
 {
     public static RhythmController instance;
+    public static event Action EndRhythmEvent;
 
     public Rhythm CurrentRhythm;
 
@@ -17,6 +18,12 @@ public class RhythmController : MonoBehaviour
     void Start()
     {
         instance = this;
+        SubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        EndRhythmEvent += HideIndicator;
     }
 
     private void Update()
@@ -50,10 +57,7 @@ public class RhythmController : MonoBehaviour
 
     private void EndRhythm()
     {
-        CurrentRhythm.Complete();
-        HideIndicator();
-        BattleController.instance. ProgressTurn();
-        InputController.instance.UserInput.SetInputState(PlayerInputState.SelectAbility);
+        EndRhythmEvent?.Invoke();
     }
 
     private IEnumerator ProcessRhythm()
@@ -73,6 +77,7 @@ public class RhythmController : MonoBehaviour
 
         CurrentRhythm = new Rhythm();
         CurrentRhythm.Begin();
+        EndRhythmEvent += CurrentRhythm.Complete;
     }
 
     private void HideIndicator()

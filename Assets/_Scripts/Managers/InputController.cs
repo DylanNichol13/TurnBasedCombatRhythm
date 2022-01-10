@@ -16,6 +16,12 @@ public class InputController : MonoBehaviour
     {
         instance = this;
         UserInput = new UserInput();
+        SubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        RhythmController.EndRhythmEvent += UserInput.SetInputSelectAbility;
     }
 
     private void Update()

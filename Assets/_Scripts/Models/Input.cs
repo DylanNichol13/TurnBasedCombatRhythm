@@ -57,4 +57,9 @@ public class UserInput
     {
         PlayerInputState = state;
     }
+
+    public void SetInputSelectAbility()
+    {
+        SetInputState(PlayerInputState.SelectAbility);
+    }
 }

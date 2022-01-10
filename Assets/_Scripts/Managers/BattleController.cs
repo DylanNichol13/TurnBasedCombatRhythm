@@ -14,13 +14,18 @@ public class BattleController : MonoBehaviour
     private List<BattlePosition> _battlePositions = new List<BattlePosition>();
 
     // Start is called before the first frame update
-    internal void Start()
+    internal void Awake()
     {
         instance = this;
+        
+        StartBattle();
+        CurrentBattle.SetupNewTurn();
+        SubscribeEvents();
+    }
 
-        //Init test battle
-        InitBattle();
-        SpawnCharacters();
+    private void SubscribeEvents()
+    {
+
     }
 
 
@@ -29,21 +34,18 @@ public class BattleController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ProgressTurn();
+            CurrentBattle.ChangeTurn();
         }
     }
 
-    ///Public
-    //Progress the turn and do all related behaviour here
-    public void ProgressTurn()
+    private void StartBattle()
     {
-        var newCurrentAgent = CurrentBattle.ProgressQueue();
-
-        //Update UI
-        UIController.instance.SetCurrentTurnAgent(newCurrentAgent);
-        UIController.instance.SetupAbilityInterface(newCurrentAgent);
+        //Init test battle
+        InitBattle();
+        SpawnCharacters();
+        RhythmController.EndRhythmEvent += CurrentBattle.ChangeTurn;
     }
-
+    
     ///Private
     //Init a test battle
     private void InitBattle()

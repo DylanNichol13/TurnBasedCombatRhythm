@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2231883382221503721}
   - component: {fileID: 6071281378142857733}
   - component: {fileID: 7724638366128456251}
+  - component: {fileID: 3241722351028277109}
   m_Layer: 0
   m_Name: AgentPrefab
   m_TagString: Untagged
@@ -122,3 +123,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdefaffaf83edbe48a7106c126247a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3241722351028277109
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675474274430129941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 468c88c6c1e900a4b9be9d5164559bb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

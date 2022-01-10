@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,9 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
+    public static event Action InitializeEvent;
+
+    public void Initialize() { InitializeEvent?.Invoke(); }
 
     [SerializeField] private TextMeshProUGUI _currentTurnAgentName;
 
@@ -22,19 +26,38 @@ public class UIController : MonoBehaviour
         AbilityButtonTemplate = GameObject.Find("Template_AbilityButton");
     }
 
+    private void OnEnable()
+    {
+        SubscribeEvents();
+        Initialize();
+    }
+
+    //Subscribe actions to events
+    private void SubscribeEvents()
+    {
+        Battle.ChangeTurnEvent += SetCurrentTurnAgent;
+        Battle.ChangeTurnEvent += SetupAbilityInterface;
+
+        InitializeEvent += SetCurrentTurnAgent;
+        InitializeEvent += SetupAbilityInterface;
+    }
+
     ///Public
     //Set up UI of the new current turn agent
-    public void SetCurrentTurnAgent(Agent agent)
+    public void SetCurrentTurnAgent()
     {
+        var agent = BattleController.instance.CurrentBattle.CurrentTurnAgent;
         _currentTurnAgentName.text = agent.Name;
     }
 
-    public void SetupAbilityInterface(Agent agent)
+    public void SetupAbilityInterface()
     {
+        var agent = BattleController.instance.CurrentBattle.CurrentTurnAgent;
         ClearAbilitiesParent();
         CreateAbilitiesButtons(agent);
     }
 
+    ///Private
     ///Setup ability UI
     private void CreateAbilitiesButtons(Agent agent)
     {

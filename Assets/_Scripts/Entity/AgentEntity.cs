@@ -5,6 +5,17 @@ using UnityEngine;
 public class AgentEntity : MonoBehaviour
 {
     public Agent Agent;
+    public Animator Animator;
+
+    private void OnEnable()
+    {
+        Animator = GetComponent<Animator>();
+    }
+
+    public void SetAnimation(bool turnActive)
+    {
+        Animator.SetBool("turnActive", turnActive);
+    }
 
     private void OnMouseDown()
     {
