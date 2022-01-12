@@ -6,12 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+public class UIController : MonoBehaviour, IGameController
 {
     public static UIController instance;
-    public static event Action InitializeEvent;
+    public static event Action SetupEvent;
 
-    public void Initialize() { InitializeEvent?.Invoke(); }
+    public void Setup() { SetupEvent?.Invoke(); }
 
     [SerializeField] private TextMeshProUGUI _currentTurnAgentName;
 
@@ -22,24 +22,25 @@ public class UIController : MonoBehaviour
     void Awake()
     {
         instance = this;
-        AbilitiesParent = GameObject.Find("AbilitiesParent").transform;
-        AbilityButtonTemplate = GameObject.Find("Template_AbilityButton");
     }
 
-    private void OnEnable()
+    public void Initialize()
     {
+        AbilitiesParent = GameObject.Find("AbilitiesParent").transform;
+        AbilityButtonTemplate = GameObject.Find("Template_AbilityButton");
+
         SubscribeEvents();
-        Initialize();
+        Setup();
     }
 
     //Subscribe actions to events
-    private void SubscribeEvents()
+    public void SubscribeEvents()
     {
         Battle.ChangeTurnEvent += SetCurrentTurnAgent;
         Battle.ChangeTurnEvent += SetupAbilityInterface;
 
-        InitializeEvent += SetCurrentTurnAgent;
-        InitializeEvent += SetupAbilityInterface;
+        SetupEvent += SetCurrentTurnAgent;
+        SetupEvent += SetupAbilityInterface;
     }
 
     ///Public

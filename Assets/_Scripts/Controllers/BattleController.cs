@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BattleController : MonoBehaviour
+public class BattleController : MonoBehaviour, IGameController
 {
     public static BattleController instance;
 
@@ -17,17 +17,19 @@ public class BattleController : MonoBehaviour
     internal void Awake()
     {
         instance = this;
-        
+    }
+
+    public void Initialize()
+    {
         StartBattle();
         CurrentBattle.SetupNewTurn();
         SubscribeEvents();
     }
 
-    private void SubscribeEvents()
+    public void SubscribeEvents()
     {
 
     }
-
 
     // Update is called once per frame
     internal void Update()

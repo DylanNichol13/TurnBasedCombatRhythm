@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RhythmController : MonoBehaviour
+public class RhythmController : MonoBehaviour, IGameController
 {
     public static RhythmController instance;
     public static event Action EndRhythmEvent;
@@ -15,13 +15,17 @@ public class RhythmController : MonoBehaviour
     public bool RhythmActive() { return CurrentRhythm != null && CurrentRhythm.AttackState == AttackState.Active; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
+    }
+
+    public void Initialize()
+    {
         SubscribeEvents();
     }
 
-    private void SubscribeEvents()
+    public void SubscribeEvents()
     {
         EndRhythmEvent += HideIndicator;
     }

@@ -750,6 +750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 728961360}
+  - component: {fileID: 728961362}
   - component: {fileID: 728961361}
   m_Layer: 0
   m_Name: Managers
@@ -787,6 +788,18 @@ MonoBehaviour:
   AgentObjectPrefab: {fileID: 5675474274430129941, guid: e58f4f1d09d797a45a7481d1d8062c48, type: 3}
   HoverPointerPrefab: {fileID: 4066738703995970727, guid: 0775c8e19ef9c584c9e4c424cd6e6f9e, type: 3}
   AttackReadyIndicatorPrefab: {fileID: 6878272626582338210, guid: 0c50971a62d7bcc488e1161882ada1e9, type: 3}
+--- !u!114 &728961362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728961359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9a53ae1b003e24f99c51f17131367f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &730280928
 GameObject:
   m_ObjectHideFlags: 0

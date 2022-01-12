@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class InputController : MonoBehaviour, IGameController
 {
     public static InputController instance;
 
@@ -12,14 +12,18 @@ public class InputController : MonoBehaviour
     private GameObject _hoverPointer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
+    }
+
+    public void Initialize()
+    {
         UserInput = new UserInput();
         SubscribeEvents();
     }
 
-    private void SubscribeEvents()
+    public void SubscribeEvents()
     {
         RhythmController.EndRhythmEvent += UserInput.SetInputSelectAbility;
     }
