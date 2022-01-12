@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentTurnAgentName;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;   
     }
