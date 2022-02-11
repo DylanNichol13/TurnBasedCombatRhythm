@@ -23,17 +23,8 @@ public class RhythmController : MonoBehaviour
     {
         ProcessActiveRhythm();
     }
-
-    public void StartNewRhythm()
-    {
-        StartCoroutine(ProcessRhythm());
-    }
-
-    public void SuccessfulHit()
-    {
-        EndRhythm();
-    }
-
+    
+    //Check for active rhythm expiration
     private void ProcessActiveRhythm()
     {
         if (CurrentRhythm == null) return;
@@ -48,14 +39,13 @@ public class RhythmController : MonoBehaviour
         }
     }
 
-    private void EndRhythm()
+    //Called by UserInput when a target is selected
+    public void StartNewRhythm()
     {
-        CurrentRhythm.Complete();
-        HideIndicator();
-        BattleController.instance. ProgressTurn();
-        InputController.instance.UserInput.SetInputState(PlayerInputState.SelectAbility);
+        StartCoroutine(ProcessRhythm());
     }
 
+    //Wait for X time and set the rhythm to active and waiting for input
     private IEnumerator ProcessRhythm()
     {
         yield return new WaitForSeconds(1.5f);
@@ -63,6 +53,7 @@ public class RhythmController : MonoBehaviour
         SetRhythmActive();
     }
 
+    //Show the rhythm indicator sprite and set the Rhythm active timer in CurrentRhythm.Begin()
     private void SetRhythmActive()
     {
         if (_attackReadyIndicator == null) _attackReadyIndicator = Instantiate(PrefabManager.instance.AttackReadyIndicatorPrefab);
@@ -75,6 +66,22 @@ public class RhythmController : MonoBehaviour
         CurrentRhythm.Begin();
     }
 
+    //Called by userInput when a rhythm is active and user successfully completes
+    public void SuccessfulHit()
+    {
+        EndRhythm();
+    }
+
+    //Called to end the rhythm in session
+    private void EndRhythm()
+    {
+        CurrentRhythm.Complete();
+        HideIndicator();
+        BattleController.instance.ProgressTurn();
+        InputController.instance.UserInput.SetInputState(PlayerInputState.SelectAbility);
+    }
+
+    //Hide the sprite indicator
     private void HideIndicator()
     {
         if (_attackReadyIndicator == null) return;
